@@ -31,8 +31,12 @@ app.post("/save", async (req, res) => {
     let data = await Users(req.body)
     data = await data.save();
     if (data) {
-        res.redirect("/")
+        res.render("index")
     }
+    else {
+        res.render("index")
+    }
+
 })
 
 // update and save new data
@@ -53,6 +57,7 @@ app.get("/delete/:id", async (req, res) => {
     let data = await Users.deleteOne({ _id: req.params.id })
     console.log(data)
     if (data) {
+        // req.flash('deleted', "Record Deleted Successfully.");
         res.redirect("/")
     }
 })
